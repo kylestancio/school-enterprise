@@ -1,0 +1,17 @@
+services:
+  db:
+    image: postgres:16.0-alpine
+    restart: always
+    environment:
+      POSTGRES_USER: postgres
+      POSTGRES_PASSWORD: 8534d564d0bb254570c1316858891d0d
+      POSTGRES_DB: schoolenterprisedb
+    volumes:
+      - /var/lib/postgresql
+    ports:
+      - 5433:5432
+  manage:
+    build: ./manage
+    restart: always
+    ports:
+      - 3002:3000
