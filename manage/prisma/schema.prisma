@@ -11,20 +11,102 @@ datasource db {
 }
 
 model User {
-  id                  String      @id @default(cuid())
-  roles               Role[]     
-  fullName            String
-  email               String      @unique
-  username            String      @unique
-  password            String
-  extendedDetails     Json?
-  createdAt           DateTime    @default(now())
-  updatedAt           DateTime    @default(now()) @updatedAt
+  id              String   @id @default(cuid())
+  roles           UserRole[]
+  fullName        String
+  email           String   @unique
+  username        String   @unique
+  password        String
+  extendedDetails Json?
+  createdAt       DateTime @default(now())
+  updatedAt       DateTime @default(now()) @updatedAt
 }
 
-enum Role {
-  USER
+model Employee {
+  id              String         @id @default(cuid())
+  status          EmployeeStatus @default(CONFIRMATIONSENT)
+  employeeId      String         @unique
+  fullName        String
+  email           String         @unique
+  username        String         @unique
+  password        String
+  address         String
+  birthdate       DateTime
+  employmentDate  DateTime
+  position        String
+  extendedDetails Json?
+  coursesHandled  Course[]
+  createdAt       DateTime       @default(now())
+  updatedAt       DateTime       @default(now()) @updatedAt
+}
+
+model Course {
+  id  String  @id @default(cuid())
+  status  CourseStatus  @default(ACTIVE)
+  code  String  @unique
+  name  String
+  description String
+  professor Employee?  @relation(fields: [professorId], references: [id], onDelete: SetNull)
+  professorId String?
+  room  Room? @relation(fields: [roomId], references: [id], onDelete: Restrict)
+  roomId  String
+  classDays  ClassDays[]
+  timeStartHour Int
+  timeStartMinute Int
+  timeStartPeriod TimePeriod
+  timeEndHour Int
+  timeEndMinute Int
+  timeEndPeriod TimePeriod
+
+  createdAt       DateTime       @default(now())
+  updatedAt       DateTime       @default(now()) @updatedAt
+}
+
+model Room {
+  id  String  @id @default(cuid())
+  status  RoomStatus  @default(ACTIVE)
+  code  String
+  building  String
+  courses Course[]
+  createdAt       DateTime       @default(now())
+  updatedAt       DateTime       @default(now()) @updatedAt
+}
+
+enum UserRole {
+  SUPERUSER
   EMPLOYEESMANAGER
   STUDENTSMANAGER
   PAYMENTSMANAGER
+  USER
+}
+
+enum EmployeeStatus {
+  DEACTIVATED
+  CONFIRMATIONSENT
+  ACTIVATED
+}
+
+enum CourseStatus {
+  INACTIVE
+  ACTIVE
+}
+
+enum RoomStatus {
+  INACTIVE
+  ACTIVE
+}
+
+enum TimePeriod {
+  AM
+  PM
+}
+
+enum ClassDays {
+  SUNDAY
+  MONDAY
+  TUESDAY
+  WEDNESDAY
+  THURSDAY
+  FRIDAY
+  SATURDAY
 }
