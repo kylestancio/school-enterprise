@@ -35,7 +35,7 @@ export default function EmployeeDetailsPage({
             <h3 className='text-xl font-bold'>Employee edited successfully.</h3>
             <p>An employee data has been edited successfully.</p>
           </div>
-          <CloseButton className='my-auto' baseUrl={`/employees/${params.id}`} />
+          <CloseButton className='my-auto' baseUrl={`/employees/${params.id}`} paramsName='edit'/>
         </div>
       }
       <div className='mb-3 flex'>

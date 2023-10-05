@@ -20,7 +20,7 @@ export default function EmployeesPage({
             <h3 className='text-xl font-bold'>Employee deleted successfully.</h3>
             <p>An employee data has been removed successfully.</p>
           </div>
-          <CloseButton className='my-auto' baseUrl='/employees' />
+          <CloseButton className='my-auto' baseUrl='/employees' paramsName='delete'/>
         </div>
       }
       <div className='mb-3 flex'>
