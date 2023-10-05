@@ -1,6 +1,7 @@
 import prisma from "@/lib/prisma";
 import { NextRequest, NextResponse } from "next/server";
 import * as bcrypt from 'bcrypt'
+import { UserRole } from "@prisma/client";
 
 interface IRequestBody{
   username: string,
@@ -22,7 +23,7 @@ export async function POST(req: NextRequest){
     if (superusers.length > 0) throw new Error("A superuser already exists.")
     await prisma.user.create({
       data: {
-        roles: ["SUPERUSER"],
+        roles: Object.values(UserRole).filter((v) => isNaN(Number(v))),
         username: body.username,
         password: bcrypt.hashSync(body.password, 10),
         fullName: body.fullName,
