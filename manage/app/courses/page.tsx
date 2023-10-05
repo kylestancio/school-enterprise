@@ -2,8 +2,7 @@
 import React from 'react'
 import CoursesContainer from './CoursesContainer'
 import AddCourseButton from './AddCourseButton'
-import { CheckCircle } from 'lucide-react'
-import CloseButton from './CloseButton'
+import PageAlert from '@/components/PageAlert'
 
 export default function CoursesPage({
   searchParams
@@ -17,34 +16,22 @@ export default function CoursesPage({
   return (
     <main className='container mt-10'>
       { searchParams && searchParams.new && searchParams.new==='true' && 
-        <div className='w-full mb-5 p-3 border rounded-md flex dark:bg-green-950'>
-          <CheckCircle className='my-auto mx-4' />
-          <div className='my-auto grow'>
-            <h3 className='text-xl font-bold'>Course created successfully.</h3>
-            <p>You can now link the created course to a professor.</p>
-          </div>
-          <CloseButton className='my-auto' baseUrl='/courses' paramsName='new' />
-        </div>
+        <PageAlert variant='success'>
+          <h3 className='text-xl font-bold'>Course created successfully.</h3>
+          <p>You can now link the created course to a professor.</p>
+        </PageAlert>
       }
       { searchParams && searchParams.delete && searchParams.delete==='success' && 
-        <div className='w-full mb-5 p-3 border rounded-md flex dark:bg-green-950'>
-          <CheckCircle className='my-auto mx-4' />
-          <div className='my-auto grow'>
-            <h3 className='text-xl font-bold'>Course deleted successfully.</h3>
-            <p>A course has been removed.</p>
-          </div>
-          <CloseButton className='my-auto' baseUrl='/courses' paramsName='delete' />
-        </div>
+        <PageAlert variant='success'>
+          <h3 className='text-xl font-bold'>Course deleted successfully.</h3>
+          <p>A course has been removed.</p>
+        </PageAlert>
       }
       { searchParams && searchParams.update && searchParams.update==='success' && 
-        <div className='w-full mb-5 p-3 border rounded-md flex dark:bg-green-950'>
-          <CheckCircle className='my-auto mx-4' />
-          <div className='my-auto grow'>
-            <h3 className='text-xl font-bold'>Course edited successfully.</h3>
-            <p>A course has modified.</p>
-          </div>
-          <CloseButton className='my-auto' baseUrl='/courses' paramsName='edit' />
-        </div>
+        <PageAlert variant='success'>
+          <h3 className='text-xl font-bold'>Course edited successfully.</h3>
+          <p>A course has modified.</p>
+        </PageAlert>
       }
       <div className='mb-3 flex'>
         <p className='text-2xl grow'>Courses</p>
