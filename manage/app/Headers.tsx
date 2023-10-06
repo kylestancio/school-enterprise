@@ -17,6 +17,7 @@ export default function Headers() {
         <Link href={'/'} className='text-sm font-medium hover:underline underline-offset-4 me-5'>Home</Link>
         <Link href={'/employees'} className='text-sm font-medium hover:underline underline-offset-4 me-5'>Employees</Link>
         <Link href={'/courses'} className='text-sm font-medium hover:underline underline-offset-4 me-5'>Courses</Link>
+        <Link href={'/settings'} className='text-sm font-medium hover:underline underline-offset-4 me-5'>Settings</Link>
       </div>
       <div className='my-auto'>
         <ThemeButton />
